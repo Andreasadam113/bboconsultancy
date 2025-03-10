@@ -133,3 +133,47 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
+
+// Reference carousel functionality
+document.addEventListener('DOMContentLoaded', function () {
+  let currentReference = 0;
+  const references = document.querySelectorAll('.reference-image');
+  let isAnimating = false;
+
+  function changeReference(n) {
+    if (isAnimating) return;
+    isAnimating = true;
+
+    const currentImage = references[currentReference];
+    currentImage.style.transition = 'transform 0.8s ease, opacity 0.8s ease';
+    currentImage.style.opacity = '0';
+    currentImage.style.transform =
+      n > 0 ? 'translateX(-100%)' : 'translateX(100%)';
+
+    setTimeout(() => {
+      currentImage.classList.remove('active');
+      currentReference =
+        (currentReference + n + references.length) % references.length;
+
+      const nextImage = references[currentReference];
+      nextImage.style.transition = 'transform 0.8s ease, opacity 0.8s ease';
+      nextImage.style.transform =
+        n > 0 ? 'translateX(100%)' : 'translateX(-100%)';
+      nextImage.style.opacity = '0';
+      nextImage.classList.add('active');
+
+      // Force a reflow
+      nextImage.offsetHeight;
+
+      nextImage.style.transform = 'translateX(0)';
+      nextImage.style.opacity = '1';
+
+      setTimeout(() => {
+        isAnimating = false;
+      }, 800); // Match the transition duration
+    }, 50);
+  }
+
+  // Attach changeReference to window object for onclick use in HTML
+  window.changeReference = changeReference;
+});
