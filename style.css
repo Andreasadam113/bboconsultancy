@@ -965,3 +965,47 @@ textarea.input {
     color: var(--accent-color);
    
 }
+
+
+.reference-logos {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.reference-image {
+    height: 200px;
+    object-fit: contain;
+    display: none;
+    max-width: 100%;
+}
+
+.reference-image.active {
+    display: block;
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 2em;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.arrow-left {
+    left: 0;
+    transform: translateY(-50%) translateX(-100px); /* Pas de waarde aan om de pijl verder naar links te verplaatsen */
+    color: var(--primary-color);
+}
+
+.arrow-right {
+    right: 0;
+    transform: translateY(-50%) translateX(100px); /* Pas de waarde aan om de pijl verder naar rechts te verplaatsen */
+    color: var(--primary-color);
+}
